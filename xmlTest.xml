@@ -1,0 +1,1196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SitePoint</title>
+	<atom:link href="https://www.sitepoint.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.sitepoint.com</link>
+	<description>Learn CSS &#124; HTML5 &#124; JavaScript &#124; Wordpress &#124; Tutorials-Web Development &#124; Reference &#124; Books and More</description>
+	<lastBuildDate>Wed, 26 Feb 2020 13:52:22 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>10 Ways to Hide Elements in CSS</title>
+		<link>https://www.sitepoint.com/hide-elements-in-css/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/hide-elements-in-css/#comments</comments>
+		<pubDate>Wed, 26 Feb 2020 06:00:42 +0000</pubDate>
+		<dc:creator><![CDATA[Craig Buckler]]></dc:creator>
+				<category><![CDATA[CSS]]></category>
+		<category><![CDATA[HTML & CSS]]></category>
+		<category><![CDATA[clip-path]]></category>
+		<category><![CDATA[hide and show page elements]]></category>
+		<category><![CDATA[learn-advanced-css]]></category>
+		<category><![CDATA[patrickc]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=130922</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/hide-elements-in-css/" title="10 Ways to Hide Elements in CSS" rel="nofollow"><img width="600" height="340" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/06/1582635109hide-with-css.jpg" class="webfeedsFeaturedVisual wp-post-image" alt="Ten Ways to Hide Elements in CSS" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/06/1582635109hide-with-css.jpg 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/06/1582635109hide-with-css-300x170.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>There are multiple ways to hide an element in CSS, but they differ in the way they affect accessibility, layout, animation, performance, and event handling.</strong></p>
+<h2 id="animation">Animation</h2>
+<p>Some CSS hiding options are all or nothing. The element is either fully visible or fully invisible and there’s no in-between state. Others, such as transparency, can have a range of values, so interpolated CSS animations become possible.</p>
+<h2 id="accessibility">Accessibility</h2>
+<p>Each method described below will visually hide an element, but it may or may not hide the content from assistive technologies. For example, a screen reader could still announce tiny transparent text. Further CSS properties or <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA attributes</a> such as <code>aria-hidden="true"</code> may be necessary to describe the appropriate action.</p>
+<p>Be wary that animations can also cause disorientation, migraines, seizures, or other physical discomfort for some people. Consider using a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion"><code>prefers-reduced-motion</code></a> media query to switch off animations when specified in user preferences.</p>
+<h2 id="eventhandling">Event Handling</h2>
+<p>Hiding will either stop events being triggered on that element or have no effect — that is, the element is not visible but can still be clicked or receive other user interactions.</p>
+<h2 id="performance">Performance</h2>
+<p>After a browser loads and parses the HTML DOM and CSS object model, the page is rendered in three stages:</p>
+<ol>
+<li><strong>Layout:</strong> generate the geometry and position of each element</li>
+<li><strong>Paint:</strong> draw out the pixels for each element</li>
+<li><strong>Composition</strong>: position element layers in the appropriate order</li>
+</ol>
+<p>An effect which only causes composition changes is noticeably smoother than those affecting layout. In some cases, the browser can also use hardware acceleration.</p>
+<h2 id="1opacityandfilteropacity">1. <code>opacity</code> and <code>filter: opacity()</code></h2>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity"><code>opacity: N</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter"><code>filter: opacity(N)</code></a> properties can be passed a number between 0 and 1, or a percentage between 0% and 100% denoting fully transparent and fully opaque accordingly.</p>
+<p><!-- [CODEPEN: https://codepen.io/craigbuckler/pen/bGdNdXE] --></p>
+<p class="codepen" data-height="300" data-theme-id="6441" data-default-tab="css,result" data-user="SitePoint" data-slug-hash="vYOgMKx" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="hide with opacity: 0">
+  <span>See the Pen <a href="https://codepen.io/SitePoint/pen/vYOgMKx"><br />
+  hide with opacity: 0</a> by SitePoint (<a href="https://codepen.io/SitePoint">@SitePoint</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p><script async src="https://static.codepen.io/assets/embed/ei.js"></script></p>
+<p>There’s little practical difference between the two in modern browsers, although <code>filter</code> should be used if multiple effects are applied at the same time (blur, contrast, grayscale etc.)</p>
+<p>Opacity can be animated and offers great performance, but be wary that a fully transparent element remains on the page and can trigger events.</p>
+<table>
+<thead>
+<tr>
+<th>metric</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>browser support</td>
+<td>good, but IE only supports <code>opacity</code> 0 to 1</td>
+</tr>
+<tr>
+<td>accessibility</td>
+<td>content not read if 0 or 0% is set</td>
+</tr>
+<tr>
+<td>layout affected?</td>
+<td>no</td>
+</tr>
+<tr>
+<td>rendering required</td>
+<td>composition</td>
+</tr>
+<tr>
+<td>performance</td>
+<td>best, can use hardware acceleration</td>
+</tr>
+<tr>
+<td>animation frames possible?</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>events triggered when hidden?</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2coloralphatransparency">2. <code>color</code> Alpha Transparency</h2>
+<p><code>opacity</code> affects the whole element, but it's also possible to set the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color"><code>color</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-color"><code>background-color</code></a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-color"><code>border-color</code></a> properties separately. Applying a zero alpha channel using <code>rgba(0,0,0,0)</code> or similar renders an item fully transparent:</p>
+<p><!-- [CODEPEN: https://codepen.io/craigbuckler/pen/PoqqZOK] --></p>
+<p class="codepen" data-height="300" data-theme-id="6441" data-default-tab="css,result" data-user="SitePoint" data-slug-hash="GRJrLNM" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="hide with color alpha">
+  <span>See the Pen <a href="https://codepen.io/SitePoint/pen/GRJrLNM"><br />
+  hide with color alpha</a> by SitePoint (<a href="https://codepen.io/SitePoint">@SitePoint</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Each property can be animated separately to create interesting effects. Note that transparency can’t be applied to elements with image backgrounds unless they're generated using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient"><code>linear-gradient</code></a> or similar.</p>
+<p>The alpha channel can be set with:</p>
+<ul>
+<li><code>transparent</code>: fully transparent (in-between animations are not possible)</li>
+<li><code>rgba(r, g, b, a)</code>: red, green, blue, and alpha</li>
+<li><code>hsla(h, s, l, a)</code>: hue, saturation, lightness, and alpha</li>
+<li><code>#RRGGBBAA</code> and <code>#RGBA</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>metric</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>browser support</td>
+<td>good, but IE only supports <code>transparent</code> and <code>rgba</code></td>
+</tr>
+<tr>
+<td>accessibility</td>
+<td>content still read</td>
+</tr>
+<tr>
+<td>layout affected?</td>
+<td>no</td>
+</tr>
+<tr>
+<td>rendering required</td>
+<td>painting</td>
+</tr>
+<tr>
+<td>performance</td>
+<td>good, but not as fast as <code>opacity</code></td>
+</tr>
+<tr>
+<td>animation frames possible?</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>events triggered when hidden?</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3transform">3. <code>transform</code></h2>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform"><code>transform</code></a> property can be used to translate (move), scale, rotate, or skew an element. A <code>scale(0)</code> or <code>translate(-999px, 0px)</code> off-screen will hide the element:</p>
+<p><!-- [CODEPEN: https://codepen.io/craigbuckler/pen/VwLYvZR] --></p>
+<p class="codepen" data-height="300" data-theme-id="6441" data-default-tab="css,result" data-user="SitePoint" data-slug-hash="PoqWgWE" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="hide with transform: scale(0);">
+  <span>See the Pen <a href="https://codepen.io/SitePoint/pen/PoqWgWE"><br />
+  hide with transform: scale(0);</a> by SitePoint (<a href="https://codepen.io/SitePoint">@SitePoint</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p><code>transform</code> offers excellent performance and hardware acceleration because the element is effectively moved into a separate layer and can be animated in 2D or 3D. The original layout space remains as is, but no events will be triggered by a fully hidden element.</p>
+<table>
+<thead>
+<tr>
+<th>metric</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>browser support</td>
+<td>good</td>
+</tr>
+<tr>
+<td>accessibility</td>
+<td>content still read</td>
+</tr>
+<tr>
+<td>layout affected?</td>
+<td>no — the original dimensions remain</td>
+</tr>
+<tr>
+<td>rendering required</td>
+<td>composition</td>
+</tr>
+<tr>
+<td>performance</td>
+<td>best, can use hardware acceleration</td>
+</tr>
+<tr>
+<td>animation frames possible?</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>events triggered when hidden?</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/hide-elements-in-css/">10 Ways to Hide Elements in CSS</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/hide-elements-in-css/feed/</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>How to Prepare for a Remote Job Search</title>
+		<link>https://www.sitepoint.com/how-to-prepare-for-a-remote-job-search/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/how-to-prepare-for-a-remote-job-search/#respond</comments>
+		<pubDate>Tue, 25 Feb 2020 18:00:50 +0000</pubDate>
+		<dc:creator><![CDATA[Joshua Kraus]]></dc:creator>
+				<category><![CDATA[Business]]></category>
+		<category><![CDATA[Career Advancement]]></category>
+		<category><![CDATA[Entrepreneur]]></category>
+		<category><![CDATA[Freelancing]]></category>
+		<category><![CDATA[developer job]]></category>
+		<category><![CDATA[job hunting]]></category>
+		<category><![CDATA[remote job]]></category>
+		<category><![CDATA[remote work]]></category>
+		<category><![CDATA[remote work tips]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=175086</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/how-to-prepare-for-a-remote-job-search/" title="How to Prepare for a Remote Job Search" rel="nofollow"><img width="2200" height="1468" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582616267womanworking.jpg" class="webfeedsFeaturedVisual wp-post-image" alt="" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582616267womanworking.jpg 2200w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582616267womanworking-300x200.jpg 300w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582616267womanworking-768x512.jpg 768w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582616267womanworking-1024x683.jpg 1024w" sizes="(max-width: 2200px) 100vw, 2200px" /></a><p><strong>The number of people working remotely is at an all-time high, and that’s not just because telecommuting is pants-optional. By giving employees more control over their schedule and work environment, <a href="https://www.sitepoint.com/jobs/">remote jobs</a> can enhance the work-life balance that so many people struggle to maintain.</strong></p>
+<p>But if you’ve held in-house positions for most of your career, properly preparing for your remote job search can up your chances of impressing remote employers, nailing the interview, and landing a remote job that best fits your needs.</p>
+<h2 id="whatareremoteemployerslookingfor">What Are Remote Employers Looking For?</h2>
+<p>Remote employers are looking for three things in particular.</p>
+<h3 id="independence">Independence</h3>
+<p>The office may at times feel like a panopticonic prison, but there is something to be said for workplace accountability. Can you stay focused without a boss periodically checking in on you? Can you stay productive without the sight and sound of other co-workers clacking away on their computers? When you work from home, the Damocles of the deadline is blunted and the motivating effect of being in close proximity to your team members weakens.</p>
+<p>Remote employers understand these challenges, which is why they look for candidates who can motivate themselves without external prompting. As trite as buzzwords like <em>self-starter</em> and <em>proactive</em> can be, they carry a significant amount of weight in the remote job search. Not only do you need to possess these qualities, you’ll need to be able demonstrate them to potential employers.</p>
+<h3 id="communication">Communication</h3>
+<p>Working in an office allows employees to be more passive. Don’t know what’s going on? A co-worker can fill you in via a few seconds of conversation. Your boss is only a few steps away. Maybe there’s a whiteboard in the break room with announcements. Sharing a space with people just makes it much easier to stay in the loop.</p>
+<p>But if you’re on your own, you need to take initiative. To compensate for the lack of face-to-face, a good remote worker will put effort into the virtual communication tools at their disposal. They’ll reach out to people through email or Slack. They’ll suggest video chats or calls to hash things out. Even swapping memes in a group chat can help you stay engaged. But if you give in to the temptation of solitude, communication could suffer, and so could your work.</p>
+<h3 id="rationalthinking">Rational Thinking</h3>
+<p>When communicating primarily through text, it’s all too common for our imaginations to run wild with unfounded anxieties. Emailed your boss a question and they didn’t respond within whatever time frame you’ve arbitrarily decided was reasonable? They must think it’s a dumb question and you’re dumb for asking it. They must not deem you important enough to expediently respond to. They must be offended by something you wrote. Asked a co-worker to do something and they responded with “k”? They hate you. They’re telling everyone how much they hate you. Everyone hates you. You’re garbage!</p>
+<p>Or … absolutely none of that is true and the coldness of non-verbal communication is messing with your head. Like any good employer, remote employers don’t want drama. They want rational critical thinkers who can vault the pitfalls of remote communication and maintain healthy work relationships. K?</p>
+<h2 id="howdoyoudemonstratetheseskillsonyourresume">How Do You Demonstrate These Skills On Your Resume?</h2>
+<p>Even if you have little to no remote work experience, there are ways to frame your in-house work experience so that it demonstrates remote work skills. What have you done that demonstrates independence? Communication? Rational thinking? Figure it out and integrate it into your resume.</p>
+<p>For example, if you took the initiative on anything in a previous position, emphasize it. Say you <em>independently devised and implemented project x or volunteered to plan, create, and maintain project y</em>. Explain that you <em>created and ran program z with little oversight</em>.</p>
+<p>Here are some other ideas to get you thinking:</p>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/how-to-prepare-for-a-remote-job-search/">How to Prepare for a Remote Job Search</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/how-to-prepare-for-a-remote-job-search/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Build a Simple Beginner App with Node, Bootstrap and MongoDB</title>
+		<link>https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/#respond</comments>
+		<pubDate>Tue, 25 Feb 2020 18:00:15 +0000</pubDate>
+		<dc:creator><![CDATA[James Hibbard]]></dc:creator>
+				<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Node.js]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[bootstrap]]></category>
+		<category><![CDATA[mongodb]]></category>
+		<category><![CDATA[node]]></category>
+		<category><![CDATA[node-hub]]></category>
+		<category><![CDATA[Node-JS-Tutorials]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=162947</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/" title="Build a Simple Beginner App with Node, Bootstrap and MongoDB" rel="nofollow"><img width="600" height="339" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1582112966app-development.png" class="webfeedsFeaturedVisual wp-post-image" alt="Building a Simple Beginner App with Node, Bootstrap and MongoDB" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1582112966app-development.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1582112966app-development-300x170.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>If you’re just getting started with Node.js and want to try your hand at building a web app, things can often get a little overwhelming. Once you get beyond the “Hello, World!” tutorials, much of the material out there has you copy-pasting code, with little or no explanation as to what you’re doing or why.</strong></p>
+<p>This means that, by the time you’ve finished, you’ve built something nice and shiny, but you also have relatively few takeaways that you can apply to your next project.</p>
+<p>In this tutorial, I’m going to take a slightly different approach. Starting from the ground up, I’ll demonstrate how to build a no-frills web app using Node.js, but instead of focusing on the end result, I’ll focus on a range of things you’re likely to encounter when building a real-world app. These include routing, templating, dealing with forms, interacting with a database and even basic authentication.</p>
+<p>This won’t be a JavaScript 101. If that’s the kind of thing you’re after, <a href="https://www.sitepoint.com/beginners-guide-javascript-variables-and-datatypes/">look here</a>. It will, however, be suitable for those people who feel reasonably confident with the JavaScript language, and who are looking to take their first steps in Node.js.</p>
+<h2 id="whatwellbebuilding">What We’ll Be Building</h2>
+<p>We’ll be using <a href="https://nodejs.org/en/">Node.js</a> and the <a href="http://expressjs.com/">Express framework</a> to build a simple registration form with basic validation, which persists its data to a <a href="https://www.mongodb.com/">MongoDB database</a>. We’ll add a view to list successful registration, which we’ll protect with basic HTTP authentication, and we’ll use <a href="https://getbootstrap.com/">Bootstrap</a> to add some styling. The tutorial is structured so that you can follow along step by step. However, if you’d like to jump ahead and see the end result, <a href="https://github.com/jameshibbard/demo-node-app">the code for this tutorial is also available on GitHub</a>.</p>
+<h2 id="basicsetup">Basic Setup</h2>
+<p>Before we can start coding, we’ll need to get Node, npm and MongoDB installed on our machines. I won’t go into depth on the various installation instructions, but if you have any trouble getting set up, please <a href="https://www.sitepoint.com/community/">visit our forums</a> and ask for help there.</p>
+<h3 id="nodejs">Node.js</h3>
+<p>Many websites will recommend that you head to <a href="https://nodejs.org/en/download/">the official Node download page</a> and grab the Node binaries for your system. While that works, I would suggest that you use a version manager instead. This is a program which allows you to install multiple versions of Node and switch between them at will. There are various advantages to using a version manager. For example, it negates potential permission issues which would otherwise see you installing packages with admin rights.</p>
+<p>If you fancy going the version manager route, please consult our quick tip: <a href="https://www.sitepoint.com/quick-tip-multiple-versions-node-nvm/">Install Multiple Versions of Node.js Using nvm</a>. Otherwise, grab the correct binaries for your system from the link above and install those.</p>
+<h3 id="npm">npm</h3>
+<p>npm is a JavaScript package manager which comes bundled with Node, so no extra installation is necessary here. We’ll be making quite extensive use of npm throughout this tutorial, so if you’re in need of a refresher, please consult <a href="https://www.sitepoint.com/beginners-guide-node-package-manager/">A Beginner’s Guide to npm — the Node Package Manager</a>.</p>
+<h3 id="mongodb">MongoDB</h3>
+<p>MongoDB is a document database which stores data in flexible, JSON-like documents. If you’ve never worked with Mongo before, you might like to check out our <a href="https://www.sitepoint.com/an-introduction-to-mongodb/">beginner-friendly introduction to MongoDB</a>.</p>
+<p>The quickest way to get up and running with Mongo is to use a service such as mLabs. They have a free sandbox plan which provides a single database with 0.5GB of storage running on a shared virtual machine. This is more than adequate for a simple app with a handful of users. If this sounds like the best option for you, please consult their <a href="http://docs.mlab.com/">quick-start guide</a>.</p>
+<p>You can also install Mongo locally. To do this, please visit the <a href="https://www.mongodb.com/download-center/community">official download page</a> and download the correct version of the community server for your operating system. There’s a link to detailed, OS-specific installation instructions beneath every download link, which you can consult if you run into trouble.</p>
+<h3 id="amongodbgui">A MongoDB GUI</h3>
+<p>Although not strictly necessary for following along with this tutorial, you might also like to install <a href="https://www.mongodb.com/products/compass">Compass, the official GUI for MongoDB</a>. This tool helps you visualize and manipulate your data, allowing you to interact with documents with full CRUD functionality.</p>
+<h3 id="checkthateverythingisinstalledcorrectly">Check that Everything is Installed Correctly</h3>
+<p>To check that Node and npm are installed correctly, open your terminal and type:</p>
+<pre><code class="bash language-bash">node -v
+</code></pre>
+<p>followed by:</p>
+<pre><code class="bash language-bash">npm -v
+</code></pre>
+<p>This will output the version number of each program (<code>12.14.1</code> and <code>6.13.6</code> respectively at the time of writing).</p>
+<p>If you installed Mongo locally, you can check the version number using:</p>
+<pre><code class="bash language-bash">mongo --version
+</code></pre>
+<p>This should output a bunch of information, including the version number (<code>4.2.2</code> at the time of writing).</p>
+<h3 id="checkthedatabaseconnectionusingcompass">Check the Database Connection Using Compass</h3>
+<p>If you’ve installed Mongo locally, you start the server by typing the following command into a terminal:</p>
+<pre><code class="bash language-bash">mongod
+</code></pre>
+<p>Next, open Compass. You should be able to accept the defaults (server: <code>localhost</code>,  port: 27017), press the <em>CONNECT</em> button, and establish a connection to the database server.</p>
+<p><img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/01/1579778337MongoDB-Compass-localhost27017_001.png" alt="MongoDB Compass connected to localhost:27107" /></p>
+<p><em><small>MongoDB Compass connected to localhost</small></em></p>
+<p>Note that the databases <code>admin</code>, <code>config</code> and <code>local</code> are created automatically.</p>
+<h4 id="usingacloudhostedsolution">Using a Cloud-hosted Solution</h4>
+<p>If you’re using mLabs, create a database subscription (as described in their <a href="http://docs.mlab.com/">quick-start guide</a>), then make a note of the connection details.</p>
+<p>Open Compass, click <em>New Connection</em>, then <em>Fill in connection fields individually</em>. Select <em>Username / Password</em> as the authentication method, then fill out the rest of the details. Finally, click <em>CONNECT</em> and you should be off to the races.</p>
+<p><em>Note: if you wish to use a connection string, it should look like this: <code>mongodb://&#60;dbuser&#62;:&#60;dbpassword&#62;@ds211709.mlab.com:11709/?authSource=&#60;dbname&#62;</code>.</em></p>
+<p><img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/01/1579781817MongoDB-Compass-ds211709.mlab_.com11709_002.png" alt="MongoDB Compass connected to mLabs" /></p>
+<p><em><small>MongoDB Compass connected to mLabs</small></em></p>
+<p>Note that I called my database <code>sp-node-article</code>. You can call yours what you like.</p>
+<h2 id="initializetheapplication">Initialize the Application</h2>
+<p>With everything set up correctly, the first thing we need to do is initialize our new project. To do this, create a folder named <code>demo-node-app</code>, enter that directory and type the following in a terminal:</p>
+<pre><code class="bash language-bash">npm init -y
+</code></pre>
+<p>This will create and auto-populate a <code>package.json</code> file in the project root. We can use this file to specify our dependencies and to create various <a href="https://www.sitepoint.com/guide-to-npm-as-a-build-tool/">npm scripts</a>, which will aid our development workflow.</p>
+<h3 id="installexpress">Install Express</h3>
+<p>Express is a lightweight web application framework for Node.js, which provides us with a robust set of features for writing web apps. These features include such things as route handling, template engine integration and a middleware framework, which allows us to perform additional tasks on request and response objects. There’s nothing you can do in Express that you couldn’t do in plain Node.js, but using Express means we don’t have to re-invent the wheel and it reduces boilerplate.</p>
+<p>So let’s install <a href="http://expressjs.com/">Express</a>. To do this, run the following in your terminal:</p>
+<pre><code class="bash language-bash">npm install express
+</code></pre>
+<p>This will see Express added to the <code>dependencies</code> section of the <code>package.json</code> file. This signals to anyone else running our code that Express is a package our app needs to function properly.</p>
+<h3 id="installnodemon">Install nodemon</h3>
+<p><a href="https://github.com/remy/nodemon">nodemon</a> is a convenience tool. It will watch the files in the directory it was started in, and if it detects any changes, it will automatically restart your Node application (meaning you don’t have to). In contrast to Express, nodemon is not something the app requires to function properly (it just aids us with development), so install it using:</p>
+<pre><code class="bash language-bash">npm install --save-dev nodemon
+</code></pre>
+<p>This will add nodemon to the <code>dev-dependencies</code> section of the <code>package.json</code> file.</p>
+<h3 id="createsomeinitialfiles">Create Some Initial Files</h3>
+<p>We’re almost through with the setup. All we need to do now is create a couple of initial files before kicking off the app.</p>
+<p>In the <code>demo-node-app</code> folder create an <code>app.js</code> file and a <code>start.js</code> file. Also create a <code>routes</code> folder, with an <code>index.js</code> file inside. After you’re done, things should look like this:</p>
+<pre><code class="bash language-bash">.
+├── app.js
+├── node_modules
+│   └── ...
+├── package.json
+├── package-lock.json
+├── routes
+│   └── index.js
+└── start.js
+</code></pre>
+<p>Now, let’s add some code to those files.</p>
+<p>In <code>app.js</code>:</p>
+<pre><code class="javascript language-javascript">const express = require('express');
+const routes = require('./routes/index');
+
+const app = express();
+app.use('/', routes);
+
+module.exports = app;
+</code></pre>
+<p>Here, we’re importing both the <code>express</code> module and (the export value of) our routes file into the application. The <code>require</code> function we’re using to do this is a built-in Node function which imports an object from another file or module. If you’d like a refresher on importing and exporting modules, read <a href="https://www.sitepoint.com/understanding-module-exports-exports-node-js/">Understanding module.exports and exports in Node.js</a>.</p>
+<p>After that, we’re creating a new Express app using the <a href="http://expressjs.com/en/api.html#express">express</a> function and assigning it to an <code>app</code> variable. We then tell the app that, whenever it receives a request from forward slash anything, it should use the routes file.</p>
+<p>Finally, we export our app variable so that it can be imported and used in other files.</p>
+<p>In <code>start.js</code>:</p>
+<pre><code class="javascript language-javascript">const app = require('./app');
+
+const server = app.listen(3000, () =&#62; {
+  console.log(`Express is running on port ${server.address().port}`);
+});
+</code></pre>
+<p>Here we’re importing the Express app we created in <code>app.js</code>. (Note that we can leave the <code>.js</code> off the file name in the <code>require</code> statement.) We then tell our app to listen on port 3000 for incoming connections and output a message to the terminal to indicate that the server is running.</p>
+<p>And in <code>routes/index.js</code>:</p>
+<pre><code class="javascript language-javascript">const express = require('express');
+
+const router = express.Router();
+
+router.get('/', (req, res) =&#62; {
+  res.send('It works!');
+});
+
+module.exports = router;
+</code></pre>
+<p>Here, we’re importing Express into our routes file and then grabbing the router from it. We then use the router to respond to any requests to the root URL (in this case <code>http://localhost:3000</code>) with an “It works!” message.</p>
+<h3 id="kickofftheapp">Kick off the App</h3>
+<p>Finally, let’s add an npm script to make nodemon start watching our app. Change the <code>scripts</code> section of the <code>package.json</code> file to look like this:</p>
+<pre><code class="javascript language-javascript">"scripts": {
+  "watch": "nodemon ./start.js"
+},
+</code></pre>
+<p>The <code>scripts</code> property of the <code>package.json</code> file is extremely useful, as it lets you specify arbitrary scripts to run in different scenarios. This means that you don’t have to repeatedly type out long-winded commands with a difficult-to-remember syntax. If you’d like to find out more about what npm scripts can do, read <a href="https://www.sitepoint.com/guide-to-npm-as-a-build-tool/">Give Grunt the Boot! A Guide to Using npm as a Build Tool</a>.</p>
+<p>Now, type <code>npm run watch</code> from the terminal and visit <a href="http://localhost:3000">http://localhost:3000</a>.</p>
+<p>You should see “It works!”</p>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/">Build a Simple Beginner App with Node, Bootstrap and MongoDB</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>An Introduction to MongoDB</title>
+		<link>https://www.sitepoint.com/an-introduction-to-mongodb/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/an-introduction-to-mongodb/#respond</comments>
+		<pubDate>Mon, 24 Feb 2020 02:00:30 +0000</pubDate>
+		<dc:creator><![CDATA[Manjunath M]]></dc:creator>
+				<category><![CDATA[Database]]></category>
+		<category><![CDATA[Databases]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Node.js]]></category>
+		<category><![CDATA[database]]></category>
+		<category><![CDATA[mongodb]]></category>
+		<category><![CDATA[node]]></category>
+		<category><![CDATA[node-hub]]></category>
+		<category><![CDATA[Node-JS-Tools]]></category>
+		<category><![CDATA[nosql]]></category>
+		<category><![CDATA[sql]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=162926</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/an-introduction-to-mongodb/" title="An Introduction to MongoDB" rel="nofollow"><img width="600" height="339" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1581897968mongodb.png" class="webfeedsFeaturedVisual wp-post-image" alt="Introduction to MongoDB" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1581897968mongodb.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/05/1581897968mongodb-300x170.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>MongoDB is a cross-platform, open-source, NoSQL database, used by many modern Node-based web applications to persist data.</strong></p>
+<p>In this beginner-friendly tutorial, I’ll demonstrate how to install Mongo, then start using it to store and query data. I’ll also look at how to interact with a Mongo database from within a Node program, and also highlight some of the differences between Mongo and a traditional relational database (such as MySQL) along the way.</p>
+<h2 id="terminologyandbasicconcepts">Terminology and Basic Concepts</h2>
+<p>MongoDB is a document-oriented database. This means that it doesn’t use tables and rows to store its data, but instead <em>collections</em> of JSON-like <em>documents</em>. These documents support embedded fields, so related data can be stored within them.</p>
+<p>MongoDB is also a schema-less database, so we don’t need to specify the number or type of columns before inserting our data.</p>
+<p>Here’s an example of what a MongoDB document might look like:</p>
+<pre><code class="javascript language-javascript">{
+  _id: ObjectId(3da252d3902a),
+  type: "Tutorial",
+  title: "An Introduction to MongoDB",
+  author: "Manjunath M",
+  tags: [ "mongodb", "compass", "crud" ],
+  categories: [
+    {
+      name: "javascript",
+      description: "Tutorialss on client-side and server-side JavaScript programming"
+    },
+    {
+      name: "databases",
+      description: "Tutorialss on different kinds of databases and their management"
+    },
+  ],
+  content: "MongoDB is a cross-platform, open-source, NoSQL database..."
+}
+</code></pre>
+<p>As you can see, the document has a number of <em>fields</em> (<code>type</code>, <code>title</code> etc.), which store <em>values</em> (“Tutorial”, “An Introduction to MongoDB” etc.). These values can contain strings, numbers, arrays, arrays of sub-documents (for example, the <code>categories</code> field), geo-coordinates and more.</p>
+<p>The <code>_id</code> field name is reserved for use as a primary key. Its value must be unique in the collection, it’s immutable, and it may be of any type other than an array.</p>
+<p><em>Tip: for those wondering what “JSON-like” means, internally Mongo uses something called <a href="http://bsonspec.org/">BSON</a> (short for Bin­ary JSON). In practice, you don’t really need to know much about BSON when working with MongoDB.</em></p>
+<p>As you might guess, a <strong>document</strong> in a NoSQL database corresponds to a <strong>row</strong> in an SQL database. A group of documents together is known as a <strong>collection</strong>, which is roughly synonymous with a <strong>table</strong> in a relational database.</p>
+<p>Here’s a table summarizing the different terms:</p>
+<table>
+<thead>
+<tr>
+<th>SQL Server</th>
+<th>MongoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database</td>
+<td>Database</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Collection</td>
+</tr>
+<tr>
+<td>Row</td>
+<td>Document</td>
+</tr>
+<tr>
+<td>Column</td>
+<td>Field</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>Index</td>
+</tr>
+</tbody>
+</table>
+<p>If you’re starting a new project and are unsure whether to choose Mongo or a relational database such as MySQL, now might be a good time to read our tutorial <a href="https://www.sitepoint.com/sql-vs-nosql-choose/">SQL vs NoSQL: How to Choose</a>.</p>
+<p>With that said, let’s go ahead and install MongoDB.</p>
+<h2 id="installingmongodb">Installing MongoDB</h2>
+<p><em>Note: if you’d just like to follow along with this tutorial without installing any software on your PC, there are a couple of online services you can use. <a href="https://mongoplayground.net/">Mongo playground</a>, for example, is a simple sandbox to test and share MongoDB queries online.</em></p>
+<p>MongoDB comes in various editions. The one we’re interested in is the MongoDB Community Edition.</p>
+<p>The project’s home page has excellent documentation on installing Mongo, and I won’t try to replicate that here. Rather, I’ll offer you links to instructions for each of the main operating systems:</p>
+<ul>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Install MongoDB Community Edition on Windows</a></li>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">Install MongoDB Community Edition on macOS</a></li>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
+</ul>
+<p>If you use a non-Ubuntu-based version of Linux, you can check out <a href="https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials">this page</a> for installation instructions for other distros. MongoDB is also normally available through the official Linux software channels, but sometimes this will pull in an outdated version.</p>
+<h3 id="postinstallationconfiguration">Post Installation Configuration</h3>
+<p>Once you have MongoDB installed for your system, you might encounter this error:</p>
+<pre><code class="bash language-bash">dbpath (/data/db) does not exist.
+ Create this directory or give existing directory in --dbpath.
+ See http://dochub.mongodb.org/core/startingandstoppingmongo
+</code></pre>
+<p>This means that Mongo can’t find (or access) the directory it uses to store its databases. This is pretty easy to remedy:</p>
+<pre><code class="bash language-bash">sudo mkdir -p /data/db
+sudo chown -R `id -un` /data/db
+</code></pre>
+<p>The first command creates the <code>data/db</code> directory. The second sets permissions so that Mongo can write to that directory.</p>
+<h3 id="installthecompassgui">Install the Compass GUI</h3>
+<p>We’ll be using the command line in this tutorial, but MongoDB also offers a tool called Compass to connect to and manage your databases using a GUI.</p>
+<p>If you’re on Windows, Compass can be installed as part of the main Mongo installation (just select the appropriate option from the wizard). Otherwise, you can <a href="https://docs.mongodb.com/compass/master/install/">download Compass for your respective OS here</a>.</p>
+<p>This is what it looks like:</p>
+<p><img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/01/1579526415MongoDB-Compass.png" alt="Mongo DB Compass GUI" /></p>
+<h3 id="themongoshell">The Mongo Shell</h3>
+<p>We can test our installation by opening the Mongo shell. You can do this by opening a terminal window and typing <code>mongo</code>.</p>
+<p><em>Note: this assumes that <code>&#60;mongodb installation dir&#62;/bin</code> is in your path. If for any reason this isn’t the case, change into the <code>&#60;mongodb installation dir&#62;/bin</code> directory and rerun the command.</em></p>
+<p>If you get an <code>Error: couldn't connect to server</code> error, you’ll need to start the Mongo server (in a second terminal window) with the command <code>mongod</code>.</p>
+<p>Once you’re in the Mongo shell, type in <code>db.version()</code> to see the version of MongoDB you’re running. At the time of writing, this should output <code>4.2.2</code>.</p>
+<p>Please note that you can exit the Mongo shell by running <code>quit()</code> and the Mongo daemon by pressing <kbd>Ctrl</kbd> + <kbd>C</kbd> at any time.</p>
+<p>Now let’s get acquainted with some MongoDB basics.</p>
+<h2 id="basicdatabaseoperations">Basic Database Operations</h2>
+<p>Enter the Mongo shell if you haven’t already (by typing <code>mongo</code> into a terminal):</p>
+<pre><code class="bash language-bash">[mj@localhost ~]$ mongo
+MongoDB shell version v4.2.2
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&#38;gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("08a624a0-b330-4233-b56b-1d5b15a48fea") }
+MongoDB server version: 4.2.2
+</code></pre>
+<p>Let’s start off by creating a database to work with. To create a database, MongoDB has a <code>use DATABASE_NAME</code> command:</p>
+<pre><code class="bash language-bash">&#62; use exampledb
+switched to db exampledb
+</code></pre>
+<p>To display all the existing databases, try <code>show dbs</code>:</p>
+<pre><code class="bash language-bash">&#62; show dbs
+
+admin          0.000GB
+config         0.000GB
+local          0.000GB
+</code></pre>
+<p>The <code>exampledb</code> isn’t in the list because we need to insert at least one document into the database. To insert a document, you can use <code>db.COLLECTION_NAME.insertOne({"key":"value"})</code>. Here’s an example:</p>
+<pre><code class="bash language-bash">&#62; db.users.insertOne({name: "Bob"})
+{
+   "acknowledged" : true,
+   "insertedId" : ObjectId("5a52c53b223039ee9c2daaec")
+}
+</code></pre>
+<p>MongoDB automatically creates a new <code>users</code> collection and inserts a document with the key–value pair <code>'name':'Bob'</code>. The ObjectId returned is the ID of the document inserted. MongoDB creates a unique ObjectId for each document on creation, and it becomes the default value of the <code>_id</code> field.</p>
+<p>Now we should be able to see our database:</p>
+<pre><code class="bash language-bash">&#62;show dbs
+admin          0.000GB
+config         0.000GB
+exampledb      0.000GB
+local          0.000GB
+</code></pre>
+<p>Similarly, you can confirm that the collection was created using the <code>show collections</code> command:</p>
+<pre><code>&#62; show collections
+users
+</code></pre>
+<p>We’ve created a database, added a collection named <code>users</code> and inserted a document into it. Now let’s try dropping it. To drop an existing database, use the <code>dropDatabase()</code> command, as exemplified below:</p>
+<pre><code>&#62;db.dropDatabase()
+{ "dropped" : "exampledb", "ok" : 1 }
+</code></pre>
+<p><code>show dbs</code> confirms that the database was indeed dropped:</p>
+<pre><code>&#62; show dbs
+admin          0.000GB
+config         0.000GB
+local          0.000GB
+</code></pre>
+<p>For more database operations, please consult the MongoDB reference page on <a href="https://docs.mongodb.com/manual/reference/command/">database commands</a>.</p>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/an-introduction-to-mongodb/">An Introduction to MongoDB</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/an-introduction-to-mongodb/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>How to Properly Organize Files in Your Codebase &#038; Avoid Mayhem</title>
+		<link>https://www.sitepoint.com/organize-project-files/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/organize-project-files/#respond</comments>
+		<pubDate>Thu, 20 Feb 2020 18:00:25 +0000</pubDate>
+		<dc:creator><![CDATA[Lucero del Alba]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[.gitignore]]></category>
+		<category><![CDATA[content organization]]></category>
+		<category><![CDATA[get organized]]></category>
+		<category><![CDATA[organize]]></category>
+		<category><![CDATA[organize files]]></category>
+		<category><![CDATA[sourcetree]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=175064</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/organize-project-files/" title="How to Properly Organize Files in Your Codebase &#038; Avoid Mayhem" rel="nofollow"><img width="600" height="326" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582120005organize-files.png" class="webfeedsFeaturedVisual wp-post-image" alt="How to Properly Organize Files on a Project and Avoid Mayhem" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582120005organize-files.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582120005organize-files-300x163.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>The main library, data, UI, docs and wiki, tests, legacy and third-party components …  How do we keep track and maintain order within all of this?</strong> Organizing the files in your codebase can become a daunting task.</p>
+<p>Relax — we've got this! In this article, we’ll review the most common systems for both small and large projects, with some easy-to-follow best practices.</p>
+<h2 id="whybother">Why Bother?</h2>
+<p>As with pretty much all of the tasks related to <a href="https://www.sitepoint.com/premium/books/effective-project-management-traditional-agile-extreme-hybrid-8th-edition?utm_source=blog&#038;utm_medium=articles">project management</a> — documentation, software commits, deployment — you’ll benefit from taking a conscious, programmatic approach. <em>Not only it will reduce problems now, but it will also save you and your team quality time in the future</em> when you need to quickly access and review things.</p>
+<p>You surely can recall function names from the top of your head for whatever is it that you're coding right now, and quickly find a file you need to edit, and sharply tell what works from what doesn't — or so you think. But could you say the same about that project you were working on last year?</p>
+<p>Let's admit it: <strong>software projects can go on spans of inactivity that last for months, and even years</strong>. A simple <a href="https://en.wikipedia.org/wiki/README">README file</a> could do <em>a lot</em> for your colleagues or your future self. But let's think about the other ways you could structure your project, and establish some basic rules to name files, address project documentation, and to some degree organize an effective workflow that would stand the test of time.</p>
+<h2 id="makingsenseofthings">Making Sense of Things</h2>
+<p>We’ll establish a "baseline" for organizing files in a project — a logic that will serve us for a number of situations within the scope of software development.</p>
+<p>As with our rules for <a href="https://www.sitepoint.com/committing-changes-right-way/">committing changes to your codebase the right way</a>, none of this is carved in stone, and for what it's worth, you and your team might come up with different guidelines. In any case, <em>consistency is the name of the game</em>. Be sure you understand (and discuss or dispute) what the rules are, and follow them once you've reached a consensus.</p>
+<h3 id="themandatoryset">The Mandatory Set</h3>
+<p>This is a reference list of files that nearly every software project should have:</p>
+<ul>
+<li><strong>README</strong>: this is what GitHub renders for you right under the sourcetree, and it can go <em>a long way</em> to explaining what the project is about, how files are organized, and where to find further information.</li>
+<li><strong>CHANGELOG</strong>: to list what's new, modified or discontinued on every version or revision — normally in a reverse chronological order for convenience (last changes first).</li>
+<li><strong>COPYING LICENSE</strong>: a file containing the full text of the license covering the software, including some additional copyright information, if necessary (such as third-party licenses).</li>
+<li><strong>.gitignore</strong>: assuming you use <a href="https://git-scm.com/">Git</a> (you most probably do), this will also be a must to tell what files not to sync with the repository. (See <a href="https://www.sitepoint.com/premium/books/jump-start-git/read/2/jyzj6fb9?utm_source=blog&#038;utm_medium=articles">Jump Start Git's primer on .gitignore</a> and the <a href="https://git-scm.com/docs/gitignore">documentation</a> for more info, and have a look at <a href="https://github.com/github/gitignore">a collection of useful .gitignore templates</a> for some ideas.)</li>
+</ul>
+<h4 id="supportingactors">Supporting Actors</h4>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/organize-project-files/">How to Properly Organize Files in Your Codebase &#038; Avoid Mayhem</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/organize-project-files/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Productive Remote Work (When Your Mental Health Says “No”)</title>
+		<link>https://www.sitepoint.com/productive-remote-work-when-your-mental-health-says-no/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/productive-remote-work-when-your-mental-health-says-no/#respond</comments>
+		<pubDate>Wed, 19 Feb 2020 18:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel Schwarz]]></dc:creator>
+				<category><![CDATA[Career Advancement]]></category>
+		<category><![CDATA[Entrepreneur]]></category>
+		<category><![CDATA[Freelancing]]></category>
+		<category><![CDATA[Productivity]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[mental health]]></category>
+		<category><![CDATA[productivity]]></category>
+		<category><![CDATA[productivity tips]]></category>
+		<category><![CDATA[remote work]]></category>
+		<category><![CDATA[remote work tips]]></category>
+		<category><![CDATA[remote working]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=175036</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/productive-remote-work-when-your-mental-health-says-no/" title="Productive Remote Work (When Your Mental Health Says “No”)" rel="nofollow"><img width="600" height="340" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582026850remote-working.png" class="webfeedsFeaturedVisual wp-post-image" alt="Productive Remote Working" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582026850remote-working.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1582026850remote-working-300x170.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>Remote work is <em>not</em> easy. It sounds like a dream (and it honestly is in a lot of ways), but there’s a darker side to remote work that one can’t understand until they’ve done it.</strong></p>
+<p>Here’s the deal. People that work remotely often suffer from suboptimal mental health, and so you’re probably wondering, why on earth do they do it? Well, the fact is, while remote working comes with some very unique challenges, so does <em>not</em> working remotely. The difference is that <em>remote</em> work can offer the flexibility you need to build a lifestyle that suits you.</p>
+<p><img src="https://www.sitepoint.com/wp-content/uploads/2020/02/1582026150remote-work.jpg" alt="people sitting at table with laptop" /></p>
+<p>Indeed, remote work isn’t a silver bullet for burnout or wanderlust, but if you do happen to try it out and eventually wind up succumbing to loneliness, or a lack of motivation or productivity (as many remote workers do), at least you’ll have the opportunity to change things up and make things better.</p>
+<p>In the eyes of many, it’s the lesser of two evils.</p>
+<p>That being said, attempting to diagnose what your mind and body needs isn’t that easy. What might work one day might not work on another day, and what might work for one individual might not work for another individual. Humans are complex, and in the case of remote work, everyday productivity tricks often don’t cut it.</p>
+<p>Let’s take a look.</p>
+<h2 id="ifeellonely">“I feel lonely”</h2>
+<p>Loneliness is a big issue (maybe the biggest?) for freelance remote workers and digital nomads in foreign countries, but it can also affect those that work in distributed teams (especially when some team members <em>aren’t</em> remote, as one can feel like an outsider at work using this setup). Let’s look at the solutions.</p>
+<h3 id="utilizecoworkingspaces">Utilize co-working spaces</h3>
+<p>Co-working spaces aren’t for everyone. If you teach English, it’s obviously a no-no (not because of the noise, but because the noise would be distracting to <em>other</em> remote workers). If you’re only required to dive into the odd video call, though, many co-working spaces include a few hours of “booth time”.</p>
+<p>Throw in super-fast Wi-Fi, free coffee, daily events, and a likeminded crowd, joining a co-working space is like joining a community, and some co-working spaces (such as <a href="https://hubud.org/">Hubud</a>) and <a href="https://www.dojobali.org/">Dojo Bali</a>) are literally famous! <strong>Good vibes = a huge motivation boost</strong>.</p>
+<p><img src="https://www.sitepoint.com/wp-content/uploads/2020/02/1582026194co-working.jpg" alt="happy co-workers sitting with laptops on comfy chairs" /></p>
+<h3 id="workfrombarsandcafs">Work from bars and cafés</h3>
+<p>Cafés and bars work well too. The noise and seating options might be a tad unpredictable, and when going to a new place one has to find the Wi-Fi password, but all in all the experience is very much the same. It’s still fairly easy to meet other people, as it’s likely that you won’t be the only regular customer.</p>
+<p><em>Pro-tip: download <a href="https://www.wifimap.io/">Wi-Fi Map app</a> to get the Wi-Fi passwords of networks near you!</em></p>
+<div style="margin-bottom: 1.5em;">
+<img style="margin-bottom: 0.5em;" src="https://www.sitepoint.com/wp-content/uploads/2020/02/1582026235october-1024x768.jpg" /><span style="display:block; font-size:0.8em; text-align:center; margin: 0;">My favourite café — October Coffee Gaya, Kota Kinabalu, Malaysia)</span>
+</div>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/productive-remote-work-when-your-mental-health-says-no/">Productive Remote Work (When Your Mental Health Says “No”)</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/productive-remote-work-when-your-mental-health-says-no/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Forms, File Uploads and Security with Node.js and Express</title>
+		<link>https://www.sitepoint.com/forms-file-uploads-security-node-express/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/forms-file-uploads-security-node-express/#comments</comments>
+		<pubDate>Wed, 19 Feb 2020 06:00:57 +0000</pubDate>
+		<dc:creator><![CDATA[Mark Brown]]></dc:creator>
+				<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Node.js]]></category>
+		<category><![CDATA[AurelioD]]></category>
+		<category><![CDATA[forms tutorial]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[Learn-Node-JS]]></category>
+		<category><![CDATA[node]]></category>
+		<category><![CDATA[node-hub]]></category>
+		<category><![CDATA[node.js]]></category>
+		<category><![CDATA[nodejs]]></category>
+		<category><![CDATA[server]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=115676</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/forms-file-uploads-security-node-express/" title="Forms, File Uploads and Security with Node.js and Express" rel="nofollow"><img width="600" height="339" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/02/1581663292forms-node-express.png" class="webfeedsFeaturedVisual wp-post-image" alt="Forms, File Uploads and Security with Node.js and Express" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/02/1581663292forms-node-express.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/02/1581663292forms-node-express-300x170.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>If you’re building a web application, you’re likely to encounter the need to build HTML forms on day one. They’re a big part of the web experience, and they can be complicated.</strong></p>
+<p>Typically the form-handling process involves:</p>
+<ul>
+<li>displaying an empty HTML form in response to an initial <code>GET</code> request</li>
+<li>user submitting the form with data in a <code>POST</code> request</li>
+<li>validation on both the client and the server</li>
+<li>re-displaying the form populated with escaped data and error messages if invalid</li>
+<li>doing <em>something</em> with the sanitized data on the server if it’s all valid</li>
+<li>redirecting the user or showing a success message after data is processed.</li>
+</ul>
+<p>Handling form data also comes with extra security considerations.</p>
+<p>We’ll go through all of these and explain how to build them with Node.js and <a href="https://expressjs.com/">Express</a> — the most popular web framework for Node. First, we’ll build a simple contact form where people can send a message and email address securely and then take a look what’s involved in processing file uploads.</p>
+<p><img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/02/1517662006node-forms.png" alt="A contact form with email and message with validation errors" /></p>
+<p>As ever, the complete code can be found in our <a href="https://github.com/sitepoint-editors/node-forms">GitHub repo</a>.</p>
+<h2 id="setup">Setup</h2>
+<p>Make sure you’ve got a recent version of Node.js installed. <code>node -v</code> should return <code>8.9.0</code> or higher.</p>
+<p>Download the starter code from here with Git:</p>
+<pre><code class="bash language-bash">git clone -b starter https://github.com/sitepoint-editors/node-forms.git node-forms-starter
+cd node-forms-starter
+npm install
+npm start
+</code></pre>
+<p><em>Note: The repo has two branches, <code>starter</code> and <code>master</code>. The <code>starter</code> branch contains the minimum setup you need to follow this article. The <code>master</code> branch contains a full, working demo (link above).</em></p>
+<p>There’s not <em>too much</em> code in there. It’s just a bare-bones Express setup with <a href="https://www.npmjs.com/package/ejs">EJS templates</a> and error handlers:</p>
+<pre><code class="javascript language-javascript">// server.js
+const path = require('path');
+const express = require('express');
+const layout = require('express-layout');
+
+const routes = require('./routes');
+const app = express();
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+const middlewares = [
+  layout(),
+  express.static(path.join(__dirname, 'public')),
+];
+app.use(middlewares);
+
+app.use('/', routes);
+
+app.use((req, res, next) =&#62; {
+  res.status(404).send("Sorry can't find that!");
+});
+
+app.use((err, req, res, next) =&#62; {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
+app.listen(3000, () =&#62; {
+  console.log('App running at http://localhost:3000');
+});
+</code></pre>
+<p>The root url <code>/</code> simply renders the <code>index.ejs</code> view:</p>
+<pre><code class="javascript language-javascript">// routes.js
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res) =&#62; {
+  res.render('index');
+});
+
+module.exports = router;
+</code></pre>
+<h2 id="displayingtheform">Displaying the Form</h2>
+<p>When people make a GET request to <code>/contact</code>, we want to render a new view <code>contact.ejs</code>:</p>
+<pre><code class="javascript language-javascript">// routes.js
+router.get('/contact', (req, res) =&#62; {
+  res.render('contact');
+});
+</code></pre>
+<p>The contact form will let them send us a message and their email address:</p>
+<pre><code class="markup language-markup">&#60;!-- views/contact.ejs --&#62;
+&#60;div class="form-header"&#62;
+  &#60;h2&#62;Send us a message&#60;/h2&#62;
+&#60;/div&#62;
+&#60;form method="post" action="/contact" novalidate&#62;
+  &#60;div class="form-field"&#62;
+    &#60;label for="message"&#62;Message&#60;/label&#62;
+    &#60;textarea class="input" id="message" name="message" rows="4" autofocus&#62;&#60;/textarea&#62;
+  &#60;/div&#62;
+  &#60;div class="form-field"&#62;
+    &#60;label for="email"&#62;Email&#60;/label&#62;
+    &#60;input class="input" id="email" name="email" type="email" value="" /&#62;
+  &#60;/div&#62;
+  &#60;div class="form-actions"&#62;
+    &#60;button class="btn" type="submit"&#62;Send&#60;/button&#62;
+  &#60;/div&#62;
+&#60;/form&#62;
+</code></pre>
+<p>See what it looks like at <code>http://localhost:3000/contact</code>.</p>
+<h2 id="formsubmission">Form Submission</h2>
+<p>To receive POST values in Express, you first need to include the <code>body-parser</code> middleware, which exposes submitted form values on <code>req.body</code> in your route handlers. Add it to the end of the <code>middlewares</code> array:</p>
+<pre><code class="javascript language-javascript">// server.js
+const bodyParser = require('body-parser');
+
+const middlewares = [
+  // ...
+  bodyParser.urlencoded({ extended: true }),
+];
+</code></pre>
+<p>It’s a common convention for forms to POST data back to the same URL as was used in the initial GET request. Let’s do that here and handle POST <code>/contact</code> to process the user input.</p>
+<p>Let’s look at the invalid submission first. If invalid, we need to pass back the submitted values to the view (so users don’t need to re-enter them) along with any error messages we want to display:</p>
+<pre><code class="javascript language-javascript">router.get('/contact', (req, res) =&#62; {
+  res.render('contact', {
+    data: {},
+    errors: {}
+  });
+});
+
+router.post('/contact', (req, res) =&#62; {
+  res.render('contact', {
+    data: req.body, // { message, email }
+    errors: {
+      message: {
+        msg: 'A message is required'
+      },
+      email: {
+        msg: 'That email doesn‘t look right'
+      }
+    }
+  });
+});
+</code></pre>
+<p>If there are any validation errors, we’ll do the following:</p>
+<ul>
+<li>display the errors at the top of the form</li>
+<li>set the input values to what was submitted to the server</li>
+<li>display inline errors below the inputs</li>
+<li>add a <code>form-field-invalid</code> class to the fields with errors.</li>
+</ul>
+<pre><code class="markup language-markup">&#60;!-- views/contact.ejs --&#62;
+&#60;div class="form-header"&#62;
+  &#60;% if (Object.keys(errors).length === 0) { %&#62;
+    &#60;h2&#62;Send us a message&#60;/h2&#62;
+  &#60;% } else { %&#62;
+    &#60;h2 class="errors-heading"&#62;Oops, please correct the following:&#60;/h2&#62;
+    &#60;ul class="errors-list"&#62;
+      &#60;% Object.values(errors).forEach(error =&#62; { %&#62;
+        &#60;li&#62;&#60;%= error.msg %&#62;&#60;/li&#62;
+      &#60;% }) %&#62;
+    &#60;/ul&#62;
+  &#60;% } %&#62;
+&#60;/div&#62;
+
+&#60;form method="post" action="/contact" novalidate&#62;
+  &#60;div class="form-field &#60;%= errors.message ? 'form-field-invalid' : '' %&#62;"&#62;
+    &#60;label for="message"&#62;Message&#60;/label&#62;
+    &#60;textarea class="input" id="message" name="message" rows="4" autofocus&#62;&#60;%= data.message %&#62;&#60;/textarea&#62;
+    &#60;% if (errors.message) { %&#62;
+      &#60;div class="error"&#62;&#60;%= errors.message.msg %&#62;&#60;/div&#62;
+    &#60;% } %&#62;
+  &#60;/div&#62;
+  &#60;div class="form-field &#60;%= errors.email ? 'form-field-invalid' : '' %&#62;"&#62;
+    &#60;label for="email"&#62;Email&#60;/label&#62;
+    &#60;input class="input" id="email" name="email" type="email" value="&#60;%= data.email %&#62;" /&#62;
+    &#60;% if (errors.email) { %&#62;
+      &#60;div class="error"&#62;&#60;%= errors.email.msg %&#62;&#60;/div&#62;
+    &#60;% } %&#62;
+  &#60;/div&#62;
+  &#60;div class="form-actions"&#62;
+    &#60;button class="btn" type="submit"&#62;Send&#60;/button&#62;
+  &#60;/div&#62;
+&#60;/form&#62;
+</code></pre>
+<p>Submit the form at <code>http://localhost:3000/contact</code> to see this in action. That’s everything we need on the view side.</p>
+<h2 id="validationandsanitization">Validation and Sanitization</h2>
+<p>There’s a handy middleware called <a href="https://www.npmjs.com/package/express-validator">express-validator</a> for validating and sanitizing data using the <a href="https://github.com/chriso/validator.js">validator.js</a> library. Let’s add it to our app.</p>
+<h3 id="validation">Validation</h3>
+<p>With the <a href="https://github.com/chriso/validator.js#validators">validators</a> provided, we can easily check that a message and a valid email address was provided:</p>
+<pre><code class="javascript language-javascript">// routes.js
+const { check, validationResult, matchedData } = require('express-validator');
+
+router.post('/contact', [
+  check('message')
+    .isLength({ min: 1 })
+    .withMessage('Message is required'),
+  check('email')
+    .isEmail()
+    .withMessage('That email doesn‘t look right')
+], (req, res) =&#62; {
+  const errors = validationResult(req);
+  res.render('contact', {
+    data: req.body,
+    errors: errors.mapped()
+  });
+});
+</code></pre>
+<h3 id="sanitization">Sanitization</h3>
+<p>With the <a href="https://github.com/chriso/validator.js#sanitizers">sanitizers</a> provided, we can trim whitespace from the start and end of the values, and normalize the email address into a consistent pattern. This can help remove duplicate contacts being created by slightly different inputs. For example, <code>'  Mark@gmail.com'</code> and <code>'mark@gmail.com  '</code> would both be sanitized into <code>'mark@gmail.com'</code>.</p>
+<p>Sanitizers can simply be chained onto the end of the validators:</p>
+<pre><code class="javascript language-javascript">// routes.js
+router.post('/contact', [
+  check('message')
+    .isLength({ min: 1 })
+    .withMessage('Message is required')
+    .trim(),
+  check('email')
+    .isEmail()
+    .withMessage('That email doesn‘t look right')
+    .bail()
+    .trim()
+    .normalizeEmail()
+], (req, res) =&#62; {
+  const errors = validationResult(req);
+  res.render('contact', {
+    data: req.body,
+    errors: errors.mapped()
+  });
+
+  const data = matchedData(req);
+  console.log('Sanitized:', data);
+});
+</code></pre>
+<p>The <code>matchedData</code> function returns the output of the sanitizers on our input.</p>
+<p>Also, notice our use of the <a href="https://express-validator.github.io/docs/validation-chain-api.html#bail">bail</a> method, which stops running validations if any of the previous ones have failed. We need this because if a user submits the form without entering a value into the email field, the <code>normalizeEmail</code> will attempt to normalize an empty string and convert it to an <code>@</code>. This will then be inserted into our email field when we re-render the form.</p>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/forms-file-uploads-security-node-express/">Forms, File Uploads and Security with Node.js and Express</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/forms-file-uploads-security-node-express/feed/</wfw:commentRss>
+		<slash:comments>26</slash:comments>
+		</item>
+		<item>
+		<title>Use ipdata’s Geolocation Data to Protect &#038; Customize Your Site</title>
+		<link>https://www.sitepoint.com/use-ipdatas-geolocation-data-to-protect-customize-your-site/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/use-ipdatas-geolocation-data-to-protect-customize-your-site/#respond</comments>
+		<pubDate>Tue, 18 Feb 2020 17:00:54 +0000</pubDate>
+		<dc:creator><![CDATA[Adrian Try]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[geolocation]]></category>
+		<category><![CDATA[ipdata]]></category>
+		<category><![CDATA[sponsored]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=174989</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/use-ipdatas-geolocation-data-to-protect-customize-your-site/" title="Use ipdata’s Geolocation Data to Protect &#038; Customize Your Site" rel="nofollow"><img width="2340" height="1560" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1581552075globe.png" class="webfeedsFeaturedVisual wp-post-image" alt="" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1581552075globe.png 2340w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1581552075globe-300x200.png 300w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1581552075globe-768x512.png 768w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1581552075globe-1024x683.png 1024w" sizes="(max-width: 2340px) 100vw, 2340px" /></a><p><em>This article was created in partnership with <a href="https://synd.co/39JMDgE" rel="nofollow">ipdata</a>. Thank you for supporting the partners who make SitePoint possible.</em></p>
+<p>Modern websites are becoming more and more effective at customizing content based on their visitors’ location. They can redirect users to a page in their own language, display prices in the local currency, pre-fill webforms with location information, and show the current time and date for the correct timezone.</p>
+<p><a href="https://synd.co/39JMDgE" rel="nofollow">ipdata</a> is a low-latency API that provides website owners with a wide variety of information about their visitors based on IP address (IPv4 and IPv6). Think of it as an IP geolocation and threat intelligence API.</p>
+<p>By using a visitor’s IP address you can learn their continent, country, region, city, latitude and longitude, organization or ISP, and timezone. The API also detects Proxy and Tor users, as well as known spammers and bad bots. Blocking these risks will protect your website, and reduce the need for security strategies like CAPTCHA.</p>
+<p>Let’s look specifically at some ways ipdata can help, and how to implement them on your own website.</p>
+<h3 id="redirectvisitorsandlocalizecontent">Redirect Visitors and Localize Content</h3>
+<p>When you visit the <a href="https://synd.co/39JMDgE" rel="nofollow">ipdata</a> website you’ll immediately see what the service is capable of. Everything that can be learned from your own IP address is displayed.</p>
+<p><img src="https://www.sitepoint.com/wp-content/uploads/2020/02/1581550550Screen-Shot-2020-02-12-at-7.25.02-am.png" alt="ipdata data return example" width="2356" height="1786" class="aligncenter size-full wp-image-174992" /></p>
+<p>That data includes:</p>
+<ul>
+<li>Whether you’re in the EU,</li>
+<li>Your city,</li>
+<li>State or region (and region code),</li>
+<li>Country (and country code),</li>
+<li>Continent (and continent code),</li>
+<li>Latitude and longitude,</li>
+<li>Postal or zip code,</li>
+<li>Country calling code,</li>
+<li>Your country’s flag emoji,</li>
+<li>Your service provider’s ASN and carrier information,</li>
+<li>Languages,</li>
+<li>Currency (name, code, symbol, plural),</li>
+<li>Time zone (name and abbreviation, offset, daylight savings time, current time),</li>
+<li>Threat information (Tor, Proxy, anonymous, known attacker, known abuser, threat, bogon).</li>
+</ul>
+<p>You can call ipdata's API on each page request to geolocate your visitors and localize their content. Here’s a handful of ideas of what you can achieve:</p>
+<ul>
+<li>Restrict or block access to your content to specific countries or continents,</li>
+<li>Redirect users to country-specific (or language-specific) sites or pages,</li>
+<li>Pre-fill your webforms with their location data,</li>
+<li>Show your visitors their local time and weather,</li>
+<li>Display events that are near your visitors, or available flights in their area,</li>
+<li>Serve targeted ads based on location,</li>
+<li>Enforce GDPR compliance,</li>
+<li>Automatically convert prices on your e-commerce store to their local currency, using the correct currency symbol,</li>
+<li>More accurately analyze where your traffic is coming from.</li>
+</ul>
+<p>You can get a client’s IP address <a href="https://docs.ipdata.co/use-cases/how-to-get-a-clients-ip-address-using-javascript" rel="nofollow">using JavaScript</a>, but it’s a bit of work. Instead, use ipdata’s API. It’s super-fast and reliable across all browsers. Here’s the code:</p>
+<pre><code class="javascript language-javascript">    $.get("https://api.ipdata.co?api-key=test", function(response) {
+        console.log(response.ip);
+    }, "jsonp");
+</code></pre>
+<p>Once you have a visitor’s API address, ipdata’s <a href="https://docs.ipdata.co/use-cases/get-the-country-location-from-an-ip-address" rel="nofollow">documentation</a> shows you how to get their location in 26 different languages.  You’ll also find detailed tutorials on how to code for a variety of use cases. Here are a few examples.</p>
+<p>To <strong>block (or allow) users by country</strong>, look up the <a href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes">ISO 3166 ALPHA-2 Country Codes</a> for the ones you want to blacklist or whitelist. Then follow this sample code to learn how to blacklist or whitelist them.</p>
+<pre><code class="javascript language-javascript">    // List of countries we want to block
+    // To see this in action add your country code to the array
+    var blacklist = ['US', 'CA', 'UK', 'IN']
+
+    // Getting the country code from the user's IP
+    $.get("https://api.ipdata.co?api-key=test", function (response) {
+
+      // Checking if the user's country code is in the blacklist
+      // You could inverse the logic here to use a whitelist instead
+      if (blacklist.includes(response.country_code)) {
+        alert('This content is not available at your location.');
+      } else {
+        alert("You're allowed to see this!")
+      }
+    }, "jsonp");
+</code></pre>
+<p><strong>Redirecting users by country</strong> is useful if you have country-specific online stores, or if you have a separate page with content in their language or with country-specific contact details.</p>
+<p>Here’s an example of how to redirect your visitors located in Germany and Australia. They will be redirected from https://uk.store.ipdata.co to https://de.store.ipdata.co and https://au.store.ipdata.co.</p>
+<pre><code class="javascript language-javascript">    // Getting the country code from the user's IP
+    $.get("https://api.ipdata.co?api-key=test", function (response) {
+      if (response.country_code == 'UK') {
+        window.location.href = "https://uk.store.ipdata.co";
+        } else if (response.country_code == 'DE') {
+        window.location.href = "https://de.store.ipdata.co";
+        } else if (response.country_code == 'AU') {
+        window.location.href = "https://au.store.ipdata.co";
+        }
+    }, "jsonp");
+</code></pre>
+<p>You can also <strong>personalize the content of your site</strong> depending on the user’s location.  Here’s an example that displays a special offer to UK visitors only:</p>
+<pre><code class="javascript language-javascript">    // Getting the country name from the user's IP
+    $.get("https://api.ipdata.co?api-key=test", function (response) {
+      if (response.country_code == 'UK') {
+        alert("Special offer for all our users from " +response.country_name+ "!");
+        }
+    }, "jsonp");
+</code></pre>
+<p>Instead of targeting a whole country, you can drill down to region, city or postal code (zip code). Alternatively, you could target a time zone or specific currency.</p>
+<p>You can further personalize your content by displaying the user’s local time (adjusted for DST) and local currency symbol. To request time zone data for IP address “3.3.3.3”:</p>
+<pre><code class="bash language-bash">    $ curl https://api.ipdata.co/3.3.3.3/time_zone?api-key=test
+</code></pre>
+<p>You’ll receive this response, which includes the name and abbreviation of the time zone, its UTC offset, whether it is currently DST, and the local time:</p>
+<pre><code class="javascript language-javascript">    {
+        "name": "America/Los_Angeles",
+        "abbr": "PDT",
+        "offset": "-0700",
+        "is_dst": true,
+        "current_time": "2019-03-27T01:13:48.930025-07:00"
+    }
+</code></pre>
+<p>Currency detection is similar. Here’s an example for the IP address “203.100.0.51”:</p>
+<pre><code class="bash language-bash">    curl https://api.ipdata.co/203.100.0.51/currency?api-key=test
+</code></pre>
+<p>And the response:</p>
+<pre><code class="javascript language-javascript">    {
+        "name": "Australian Dollar",
+        "code": "AUD",
+        "symbol": "AU$",
+        "native": "$",
+        "plural": "Australian dollars"
+    }
+</code></pre>
+<h3 id="protectyourwebsitefromthreats">Protect Your Website from Threats</h3>
+<p>You can also use ipdata to identify potential threats against your website. They maintain a database of over 600 million malicious IP addresses, open proxies, Tor nodes, spammers, botnets, and attackers. These are aggregated only from high-quality, authoritative sources. You can use this information in a variety of ways:</p>
+<ul>
+<li>Protect your comments by blocking known spammers and bad bots, alleviating the need for CAPTCHA,</li>
+<li>Detect frauds by determining if their credit card is from a country different to where they are located,</li>
+<li>Block anonymous traffic to eliminate the risks that come from such networks,</li>
+<li>Block high-risk countries, such as the countries where most of your malware and attacks originate,</li>
+<li>Prevent “free trial abuse” by detecting Proxy and Tor users.</li>
+</ul>
+<p>Here’s how to access the threat data for the IP address “103.76.180.54”:</p>
+<pre><code class="bash language-bash">    curl https://api.ipdata.co/103.76.180.54/threat?api-key=test
+</code></pre>
+<p>The request generates the following response:</p>
+<pre><code class="javascript language-javascript">    {
+        "is_tor": true,
+        "is_proxy": false,
+        "is_anonymous": true,
+        "is_known_attacker": false,
+        "is_known_abuser": false,
+        "is_threat": false,
+        "is_bogon": false
+    }
+</code></pre>
+<p>The visitor is using a Tor network. <code>is_anonymous</code> is true if the visitor is either a Tor or Proxy user. You can use ipdata to <strong>stop anonymous users creating an account</strong>. Here’s some sample code from the official documentation:</p>
+<pre><code class="javascript language-javascript">    // Getting the anonymity status from the user's IP
+    $.get("https://api.ipdata.co?api-key=test", function (response) {
+      if (response.threat.is_anonymous) {
+        alert("You are not allowed to create an account.");
+        }
+    }, "jsonp");
+</code></pre>
+<p>You can get more specific, for example, by blocking Proxy users but letting Tor users through:</p>
+<pre><code class="javascript language-javascript">    // Getting the anonymity status from the user's IP
+    $.get("https://api.ipdata.co?api-key=test", function (response) {
+      if (response.threat.is_proxy) {
+        alert("You are not allowed to create an account.");
+        }
+    }, "jsonp");
+</code></pre>
+<p>Some users are repeat offenders, having been repeatedly reported by admins of other websites for spam or malicious activity. You can stop them from creating an account by blocking them if one of these fields are true:</p>
+<ul>
+<li><code>is_known_abuser</code>: IP addresses that have been reported to be sources of spam,</li>
+<li><code>is_known_attacker</code>: IPs that have been reported to be the source of malicious activity.</li>
+</ul>
+<h3 id="whychooseipdata">Why Choose ipdata?</h3>
+<p>ipdata compares very favorably with <a href="https://medium.com/@ipdata_co/what-is-the-best-commercial-ip-geolocation-api-d8195cda7027" rel="nofollow">other IP Geolocation APIs</a>. It is written in Python 3 with an average execution time of 2.9 ms. It’s fast and reliable enough to keep a long list of clients happy, including Comcast, Redhat, Cooperpress, Sphero, AMD, and NASA.</p>
+<p>ipdata is highly scalable, with low latency globally. The API serves millions of requests every day at an average speed of just ~65ms, and runs in eleven data centers around the world:</p>
+<ul>
+<li>4 in the US,</li>
+<li>1 in Canada,</li>
+<li>2 in Europe (London and Frankfurt),</li>
+<li>1 in India (Mumbai),</li>
+<li>1 in South America (Sao Paulo),</li>
+<li>1 in Europe (Seol), and</li>
+<li>1 in Australia (Sydney).</li>
+</ul>
+<p>According to <a href="https://synd.co/39IQ07t" rel="nofollow">Jonathan Kosgei</a>, the Founder of ipdata, execution time is kept low by not doing any database reads or writes in the application code. “A separate authorizer function handles getting usage data from DynamoDB and authorizing users based on whether they’re within their quota or not. And its results are cached.”</p>
+<h3 id="startgeolocatingyourvisitorswithipdata">Start Geolocating Your Visitors with ipdata</h3>
+<p>By now I’m sure you’ve thought of a dozen ways you can use <a href="https://synd.co/39JMDgE" rel="nofollow">ipdata</a> to enhance and protect your website, or those of your clients. <a href="https://ipdata.co/sign-up.html" rel="nofollow">Sign up for free</a> and start testing it!</p>
+<p>The service is Jonathan Kosgei’s first SaaS, and he’s quite transparent about the smart way he set it up and the lessons he learned along the way. Learn from his experiences in his guest posts:</p>
+<ul>
+<li><a href="https://synd.co/2ZXraMM" rel="nofollow">How to build a SaaS with $0</a> (Hackernoon)—here he lists the free tiers of numerous products that enabled him to build the service without a large initial outlay,</li>
+<li><a href="https://synd.co/39IQ07t" rel="nofollow">How ipdata uses AWS to serve a global, highly-scalable IP geolocation API</a> (AWS Startups Blog)—goes into more detail with a focus on AWS,</li>
+<li><a href="https://synd.co/2Qr80vs" rel="nofollow">How Ipdata Serves 25M API Calls From 10 Infinitely Scalable Global Endpoints For $150 A Month</a> (High Scalability)—details how he responded to a failure on Black Friday by choosing a new tech stack.</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/use-ipdatas-geolocation-data-to-protect-customize-your-site/">Use ipdata’s Geolocation Data to Protect &#038; Customize Your Site</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/use-ipdatas-geolocation-data-to-protect-customize-your-site/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>How to Get Involved in the Booming Python Job Market</title>
+		<link>https://www.sitepoint.com/python-job-market/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/python-job-market/#respond</comments>
+		<pubDate>Mon, 17 Feb 2020 18:00:27 +0000</pubDate>
+		<dc:creator><![CDATA[Lucero del Alba]]></dc:creator>
+				<category><![CDATA[Programming]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[getting a job]]></category>
+		<category><![CDATA[job]]></category>
+		<category><![CDATA[programming job]]></category>
+		<category><![CDATA[python]]></category>
+		<category><![CDATA[python job]]></category>
+
+		<guid isPermaLink="false">https://www.sitepoint.com/?p=174902</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/python-job-market/" title="How to Get Involved in the Booming Python Job Market" rel="nofollow"><img width="600" height="333" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1580806091python-job.png" class="webfeedsFeaturedVisual wp-post-image" alt="How to Jump Aboard the Booming Python Job Market" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1580806091python-job.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2020/02/1580806091python-job-300x167.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>From finance to artificial intelligence, data science to web development, there isn't an area in which Python isn't consolidated and flourishing. So let's discuss actual salaries, in-demand skills, marketplaces, and what to do in order to remain competitive.</strong></p>
+<p><em>Find remote jobs in tech, including Python, on <a href="https://www.sitepoint.com/jobs?utm_source=blog&#038;utm_medium=articles">SitePoint Remote</a>.</em></p>
+<h2 id="thejobmarkettoday">The Job Market Today</h2>
+<p>Information technology has created an <em>extremely</em> varied and dynamic market, and saying "computer science" alone is something of an umbrella term now. Pretty much everything has elements of IT in it to some degree — from the algorithms that recommend which TV series you should watch, to the code on this page, and even the software integrating your home appliances with your mobile.</p>
+<p>From this wide array of areas — all of them careers in their own right — we'll pick a handful. All of them are within <em>multi-million/billion-dollar industries</em> that are particularly hot as of 2020, and will most probably remain active in the foreseeable future.</p>
+<p>We are talking about:</p>
+<ul>
+<li>AI</li>
+<li>cloud development</li>
+<li>cryptocurrencies and finance</li>
+<li>data science</li>
+<li>web development and mobile apps</li>
+</ul>
+<p><em>Nearly any position in an exciting, forward-moving and profitable industry will require Python mastery</em>. Stack Overflow Trends very eloquently shows <a href="https://insights.stackoverflow.com/trends?tags=python%2Cjavascript%2Cjava%2Cc%2B%2B%2Cr%2C.net%2Cgo%2Cscala">how Python has gained traction since 2008 to become the most talked-about programming language</a>.</p>
+<p>But programming alone won't cut it. You’ll also need solid knowledge specific to the industry before you'll be considered for the position.</p>
+<p>Let's examine how Python has stacked up against other languages in each field during the last five years on <a href="https://trends.google.com/">Google Trends</a>, and also discuss what additional knowledge will be expected from you.</p>
+<h2 id="statisticsanalysisanddeeplearning">Statistics Analysis and Deep Learning</h2>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/python-job-market/">How to Get Involved in the Booming Python Job Market</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/python-job-market/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>What Is Node and When Should I Use It?</title>
+		<link>https://www.sitepoint.com/an-introduction-to-node-js/?utm_source=rss</link>
+		<comments>https://www.sitepoint.com/an-introduction-to-node-js/#comments</comments>
+		<pubDate>Sun, 16 Feb 2020 23:00:25 +0000</pubDate>
+		<dc:creator><![CDATA[James Hibbard]]></dc:creator>
+				<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Node.js]]></category>
+		<category><![CDATA[Learn-Node-JS]]></category>
+		<category><![CDATA[node]]></category>
+		<category><![CDATA[node-hub]]></category>
+		<category><![CDATA[node.js]]></category>
+		<category><![CDATA[server-side]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/jspro/?p=99</guid>
+		<description><![CDATA[<a href="https://www.sitepoint.com/an-introduction-to-node-js/" title="What Is Node and When Should I Use It?" rel="nofollow"><img width="600" height="340" src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/01/1581568431node.png" class="webfeedsFeaturedVisual wp-post-image" alt="What Is Node and When Should I Use It?" style="display: block; margin: auto; margin-bottom: 5px;max-width: 100%;" link_thumbnail="1" srcset="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/01/1581568431node.png 600w, https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2018/01/1581568431node-300x170.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p><strong>So you’ve heard of Node.js, but aren’t quite sure what it is or where it fits into your development workflow. Or maybe you’ve heard people singing Node’s praises and now you’re wondering if it’s something you need to learn. Perhaps you’re familiar with another back-end technology and want to find out what’s different about Node.</strong></p>
+<p>If that sounds like you, then keep reading. In this article, I’ll take a beginner-friendly, high-level look at Node.js and its main paradigms. I’ll examine Node’s main use cases, as well as the current state of the Node landscape, and offer you a wide range of jumping off points (for further reading) along the way.</p>
+<p><em>Please note that, throughout the article, I’ll use “Node” and “Node.js” interchangeably.</em></p>
+<h2 id="whatisnodejs">What Is Node.js?</h2>
+<p>There are plenty of definitions to be found online. Let’s take a look at a couple of the more popular ones. This is <a href="https://nodejs.org/en/">what the project’s home page has to say</a>:</p>
+<blockquote>
+<p>Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.</p>
+</blockquote>
+<p>And this is <a href="https://stackoverflow.com/tags/node.js/info">what Stack Overflow has to offer</a>:</p>
+<blockquote>
+<p>Node.js is an event-based, non-blocking, asynchronous I/O runtime that uses Google's V8 JavaScript engine and libuv library.</p>
+</blockquote>
+<p>Hmmm, “event-based”, “non-blocking”, “asynchronous I/O” — that’s quite a lot to digest in one go. So let’s approach this from a different angle and begin by focusing on the other detail that both descriptions mention — the V8 JavaScript engine.</p>
+<h3 id="nodeisbuiltongooglechromesv8javascriptengine">Node Is Built on Google Chrome’s V8 JavaScript Engine</h3>
+<p><a href="https://v8.dev/">The V8 engine</a> is the open-source JavaScript engine that runs in Google Chrome and other Chromium-based web browsers, including Brave, Opera, and Vivaldi. It was designed with performance in mind and is responsible for compiling JavaScript directly to native machine code that your computer can execute.</p>
+<p>However, when we say that Node is built on the V8 engine, we don’t mean that Node programs are executed in a browser. They aren’t. Rather, the creator of Node (<a href="https://en.wikipedia.org/wiki/Ryan_Dahl">Ryan Dahl</a>) took the V8 engine and enhanced it with various features, such as a file system API, an HTTP library, and a number of operating system–related utility methods.</p>
+<p>This means that Node.js is a program we can use to execute JavaScript on our computers. In other words, it’s a JavaScript runtime.</p>
+<h2 id="howdoiinstallnodejs">How Do I Install Node.js?</h2>
+<p>In this next section, we’ll install Node and write a couple of simple programs. We’ll also look at <a href="https://www.npmjs.com/">npm</a>, a package manager that comes bundled with Node.</p>
+<h3 id="nodebinariesvsversionmanager">Node Binaries vs Version Manager</h3>
+<p>Many websites will recommend that you head to <a href="https://nodejs.org/en/download/">the official Node download page</a> and grab the Node binaries for your system. While that works, I would suggest that you use a version manager instead. This is a program that allows you to install multiple versions of Node and switch between them at will. There are various advantages to using a version manager. For example, it negates potential permission issues when using Node with npm and lets you set a Node version on a per-project basis.</p>
+<p>If you fancy going the version manager route, please consult our quick tip: <a href="https://www.sitepoint.com/quick-tip-multiple-versions-node-nvm/">Install Multiple Versions of Node.js using nvm</a>. Otherwise, grab the correct binaries for your system from the link above and install those.</p>
+<h3 id="helloworldthenodejsway">“Hello, World!” the Node.js Way</h3>
+<p>You can check that Node is installed on your system by opening a terminal and typing <code>node -v</code>. If all has gone well, you should see something like <code>v12.14.1</code> displayed. This is the current <abbr title="long-term support">LTS</abbr> version at the time of writing.</p>
+<p>Next, create a new file <code>hello.js</code> and copy in the following code:</p>
+<pre><code class="javascript language-javascript">console.log("Hello, World!");
+</code></pre>
+<p>This uses Node’s <a href="https://nodejs.org/api/console.html#console_console">built-in console module</a> to display a message in a terminal window. To run the example, enter the following command:</p>
+<pre><code class="bash language-bash">node hello.js
+</code></pre>
+<p>If Node.js is configured properly, “Hello, World!” will be displayed.</p>
+<h3 id="nodejshasexcellentsupportformodernjavascript">Node.js Has Excellent Support for Modern JavaScript</h3>
+<p>As can be seen on this <a href="https://node.green/">compatibility table</a>, Node has excellent support for ECMAScript 2015 (ES6) and beyond. As you’re only targeting one runtime (a specific version of the V8 engine), this means that you can write your JavaScript using the latest and most modern syntax. It also means that you don’t generally have to worry about compatibility issues — as you would if you were writing JavaScript that would run in different browsers.</p>
+<p>To illustrate the point, here’s a second program that makes use of several modern JavaScript features, such as tagged <a href="https://www.sitepoint.com/understanding-ecmascript-6-template-strings/">template literals</a>, <a href="https://www.sitepoint.com/preparing-ecmascript-6-destructuring-assignment/">object destructuring</a> and  <a href="https://thecodebarbarian.com/whats-new-in-es2019-flat-flatmap-catch.html#arrayflat-and-arrayflatmap">Array.prototype.flatMap()</a>:</p>
+<pre><code class="javascript language-javascript">function upcase(strings, ...values) {
+  return values.map(name =&#62; name[0].toUpperCase() + name.slice(1))
+    .join(' ') + strings[2];
+}
+
+const person = {
+  first: 'brendan',
+  last: 'eich',
+  age: 56,
+  position: 'CEO of Brave Software',
+};
+
+const { first, last } = person;
+const emoticon = [ ['┌', '('], ['˘', '⌣'], ['˘', ')', 'ʃ'] ];
+
+console.log(
+  upcase`${first} ${last} is the creator of JavaScript! ` + emoticon.flat().join('')
+);
+</code></pre>
+<p>Save this code to a file called <code>index.js</code> and run it from your terminal using the command <code>node index.js</code>. You should see <code>Brendan Eich is the creator of JavaScript! ┌(˘⌣˘)ʃ</code> output to the terminal.</p>
+<h2 id="introducingnpmthejavascriptpackagemanager">Introducing npm, the JavaScript Package Manager</h2>
+<p>As I mentioned earlier, Node comes bundled with a package manager called npm. To check which version you have installed on your system, type <code>npm -v</code>.</p>
+<p>In addition to being <em>the</em> package manager for JavaScript, npm is also the world’s largest software registry. There are over 1,000,000 packages of JavaScript code available to download, with billions of downloads per week. Let’s take a quick look at how we would use npm to install a package.</p>
+<h3 id="installingapackageglobally">Installing a Package Globally</h3>
+<p>Open your terminal and type the following:</p>
+<pre><code class="bash language-bash">npm install -g jshint
+</code></pre>
+<p>This will install the <a href="https://www.npmjs.com/package/jshint">jshint package</a> globally on your system. We can use it to lint the <code>index.js</code> file from the previous example:</p>
+<pre><code>jshint index.js
+</code></pre>
+<p>You should now see a number of ES6-related errors. If you want to fix them up, add <code>/* jshint esversion: 6 */</code> to the top of the <code>index.js</code> file, re-run the command and linting should pass.</p>
+<p>If you’d like a refresher on linting, see <a href="https://www.sitepoint.com/comparison-javascript-linting-tools/">A Comparison of JavaScript Linting Tools</a>.</p>
+<p>The post <a rel="nofollow" href="https://www.sitepoint.com/an-introduction-to-node-js/">What Is Node and When Should I Use It?</a> appeared first on <a rel="nofollow" href="https://www.sitepoint.com">SitePoint</a>.</p>
+]]></description>
+		<wfw:commentRss>https://www.sitepoint.com/an-introduction-to-node-js/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 179/199 objects using memcached
+Page Caching using memcached 
+Content Delivery Network via Amazon Web Services: CloudFront: dab1nmslvvntp.cloudfront.net
+
+Served from: www.sitepoint.com @ 2020-02-26 07:52:55 by W3 Total Cache
+-->

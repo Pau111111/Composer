@@ -1,23 +1,51 @@
-<?php
-require './vendor/autoload.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+    Enter feed URL here: <input type="url" name="feed_url" value="http://dummy.restapiexample.com/api/v1/employees">
+    <input type="submit" value="Read">
+    </form>
+    <?php
+    if(isset($_REQUEST['feed_url'])){
+        require './vendor/autoload.php';
 
-use GuzzleHttp\Client;
+        $myClient = new GuzzleHttp\Client([
+            'headers' => ['User-Agent'=>'MyReader']
+        ]);
 
+        $response = $myClient->request('GET', $_REQUEST['feed_url']);
+        if($response->getStatusCode() == 200){
+            if($response->hasHeader('content-length')){
+                $contentLength = $response->getHeader('content-lenght')[0];
+                echo "<p>Downloaded $contentLength bytes of data.</p>";
+            }
+            $body = $response->getBody();
+            
+            /* XML RESPONSE */
+            //$xml = new SimpleXMLElement($body);
+            
+            /* JSON RESPONSE */
+            $json = json_decode($body->getContents());
+            //ALTERNATIVE
+            //$json = json_decode($body->getContents())[0];
+            
+            //var_dump($json->data);
 
-$client = new Client([
-    // Base URI is used with relative requests
-    'base_uri' => 'https://reqres.in/api/users?page=2',
-    // You can set any number of default request options.
-    'timeout'  => 5.0,
-]);
+            foreach($json->data as $item){
+                echo "<h3>" . $item->employee_name . "</h3>";
+            }
 
-// $client2 = new GuzzleHttp\Client(['base_uri' => 'https://reqres.in/api/users?page=2']);
-
-
-// // Send a request to https://foo.com/api/test
-// $response = $client->request('GET', 'test');
-// // Send a request to https://foo.com/root
-// $response = $client->request('GET', '/root');
-
-echo "HEY!"
-?>
+            // foreach($xml->channel->item as $item){
+            //     echo "<h3>" . $item->title . "</h3>";
+            //     echo "<p>" . $item->description . "</>";
+            // }
+        }
+    }
+    ?>
+</body>
+</html>
