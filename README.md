@@ -18,6 +18,7 @@ Packages
 --------
 
 Find packages on [Packagist](https://packagist.org).
+For install and use GuzzleHttp, see [the documentation](http://docs.guzzlephp.org/en/stable/overview.html#installation).
 
 Requirements
 ------------
